@@ -1,0 +1,87 @@
+1. What is the purpose of the Multicast transformation in SSIS? Provide a use-case where it is necessary.
+
+Javob:
+Multicast transformation ma'lumot oqimini bir nechta yo'nalishga nusxalab beradi. Bu, ya'ni, kiruvchi ma'lumotni bir necha transformatsiyalar yoki manzillarga yuborish imkonini beradi.
+
+Use-case:
+Masalan, biror jadvaldan olingan ma'lumotlarni bir yo'nalishda faylga yozish, ikkinchi yo'nalishda esa boshqa jadvalga insert qilish kerak bo'lsa, Multicast yordamida bu ikki yo'nalishga bir vaqtning o'zida ma’lumot yuboriladi.
+
+
+2. What is the difference between Delimited and Fixed Width text formats in Flat File sources?
+
+Javob:
+
+Delimited: Ustunlar orasidagi ajratuvchi belgi (masalan: vergul, nuqta-vergul, tab) orqali aniqlanadi. Masalan:
+  'John,25,USA'
+Fixed Width: Har bir ustun uchun oldindan belgilanilgan belgilarning uzunligi mavjud. Masalan:
+  'John     25USA     ' (bu yerda har bir ustun belgilangan uzunlikda joy egallaydi)
+
+
+3. How can you change the code page in a flat file connection?
+
+Javob:
+Flat File Connection Manager oynasida "Advanced" yoki "General" tabga o'tiladi, so'ngra "Code page" opsiyasi orqali kerakli kodlash (masalan: 65001 - UTF-8) tanlanadi. Bu kodlash fayldagi belgilarni to'g'ri o'qish uchun zarur.
+
+
+4. Describe the process of using the Derived Column transformation to add a LoadDate column with the current date.
+
+Javob:
+
+Derived Column transformatsiyasini data flow ichiga qo'shing.
+ "Derived Column Name” degan joyga 'LoadDate' deb yozing.
+ "Derived Column” sifatida "Add as new column” ni tanlang.
+Expression qismiga 'GETDATE()' yozing.
+  Natijada, har bir qatorda 'LoadDate' ustuni hozirgi sana va vaqt bilan to'ldiriladi.
+
+
+5. How can you create a conditional column such as "Senior” or "Junior” based on an age column in Derived Column?
+
+Javob:
+Derived Column ichida quyidagi expression yoziladi:
+
+'''sql
+[Age] >= 60 ? "Senior" : "Junior"
+'''
+
+Bu shartga ko'ra, agar 'Age' 60 yoki undan katta bo'lsa, 'Senior', aks holda 'Junior' yoziladi.
+
+
+6. What happens if column names in the first row of a flat file are not checked? How does it affect column mapping?
+
+Javob:
+Agar "Column names in the first data row” belgilab qo'yilmasa, birinchi qator ma’lumot sifatida qabul qilinadi va 'Column0', 'Column1' kabi avtomatik nomlar beriladi. Bu esa mapping (ustun moslashtirish)da chalkashlikka olib kelishi mumkin.
+
+
+7. Explain how to use a Script Task and Variable to count rows in SSIS and print them using C#.
+
+Javob:
+
+1. Package darajasida 'User::RowCount' nomli int32 tipidagi variable yarating.
+2. Row Count transformatsiyasini data flow ga qo'shing va 'RowCount' ni usha variablega ulang.
+3. Control Flow ichida Script Task oching va 'User::RowCount' ni ReadOnlyVariables sifatida belgilang.
+4. Script Task ichidagi 'Main' metodida quyidagicha yozing:
+
+
+MessageBox.Show("Total Rows: " + Dts.Variables["User::RowCount"].Value.ToString());
+
+
+
+8. How do you enable and use a Data Viewer in the data flow to debug your transformation?
+
+Javob:
+
+1. Data Flow ichida istalgan ikkita transformatsiya orasidagi connectorga sichqonning o'ng tugmasi bilan bosing.
+2. "Data Viewers" ni tanlang → "Add" → "Grid" qo'shing.
+3. Debug rejimda ishga tushiring. SSIS ma’lumotlar shu yerda to'xtaydi va real vaqtda ma’lumotni ko'rsatadi.
+
+
+9. What is the role of a breakpoint in SSIS, and how is it used to monitor variables?
+
+Javob:
+Breakpoint — bu debugging jarayonida SSIS paketining bajarilishini to'xtatib, muayyan nuqtada o'zgaruvchilar va jarayon holatini tekshirish imkonini beradi.
+
+Qanday ishlatiladi:
+
+1. Control Flow ichidagi taskga o'ng tugma → "Edit Breakpoints".
+2. "Break when the container receives the OnPreExecute event” ni tanlang.
+3. Paketni Debug qilib ishga tushiring, SSIS to'xtaydi va siz o'zgaruvchilarni "Locals” yoki "Watch” oynasida ko'rishingiz mumkin.

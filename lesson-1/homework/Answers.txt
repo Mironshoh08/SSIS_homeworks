@@ -1,0 +1,34 @@
+1. SSIS Project va SSIS Package nima?
+SSIS Project — bu SSIS paketlari va ularning konfiguratsiyasini o'z ichiga olgan loyiha fayli.
+SSIS Package — bu ma'lumotlarni ko'chirish yoki o‘zgartirish ishlarini bajaradigan fayl (masalan, `.dtsx`).
+
+Ular qanday bog‘langan? Biror project bir nechta packagelardan iborat bo‘lishi mumkin, chunki har bir package turli vazifalarni alohida bajarishi mumkin (masalan, biri ma’lumotni yuklaydi, boshqasi uni tozalaydi).
+
+2. 'Source' nima?
+Source — bu ma’lumotlar olinadigan manba.
+
+Uchta keng tarqalgan source turi:
+
+Flat File Source: CSV fayldan ma’lumot olish. Masalan, import.csv fayldan ma'lumot yuklash.
+OLE DB Source: SQL Serverdan ma’lumot olish. Masalan, mijozlar ro‘yxatini olish.
+Excel Source: Excel fayldan ma’lumot olish. Masalan, hisobot.xlsx fayldan ma’lumot olish.
+
+
+3. 'Destination' nima?
+Destination — bu ma’lumotlar yuboriladigan manzil.
+
+Uchta keng tarqalgan destination turi:
+
+SQL Server Destination: Ma’lumotlarni SQL Serverdagi jadvalga saqlash. Masalan, mijozlar jadvaliga yozish.
+Flat File Destination: CSV faylga yozish. Masalan, eksport natijasini CSV ga saqlash.
+Excel Destination: Excel faylga yozish. Masalan, tayyor hisobotni Excel faylga saqlash.
+
+
+4. Control Flow va Data Flow farqi:
+
+Control Flow — ish tartibini (qarorlar, tsikllar, paketlar) belgilaydi.
+Data Flow — ma’lumotlar oqimini (source → transform → destination) boshqaradi.
+
+
+Excel Source/Destination ishlashi uchun nima kerak?
+Microsoft Access Database Engine (ya’ni Excel driver) o‘rnatilgan bo‘lishi shart.
